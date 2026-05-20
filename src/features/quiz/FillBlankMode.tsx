@@ -8,9 +8,15 @@ import { useLanguagePairContext } from '@contexts/LanguagePairContext';
 import { pickN } from '@utils/shuffle';
 import { useT } from '@hooks/useT';
 
-export function FillBlankMode({ filter }: { filter: DeckFilter }) {
+export function FillBlankMode({
+  filter,
+  count,
+}: {
+  filter: DeckFilter;
+  count?: number | undefined;
+}) {
   const t = useT();
-  const fullSession = useFlashcardSession(filter);
+  const fullSession = useFlashcardSession(filter, count);
   const queue = useMemo(
     () => fullSession.queue.filter((v) => v.exampleTarget?.includes(v.target)),
     [fullSession.queue],

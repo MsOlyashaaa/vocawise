@@ -48,9 +48,15 @@ function buildChallenge(item: ItemLike): Challenge | null {
   return null;
 }
 
-export function WordFormMode({ filter }: { filter: DeckFilter }) {
+export function WordFormMode({
+  filter,
+  count,
+}: {
+  filter: DeckFilter;
+  count?: number | undefined;
+}) {
   const t = useT();
-  const fullSession = useFlashcardSession(filter);
+  const fullSession = useFlashcardSession(filter, count);
   const challenges = useMemo(() => {
     return fullSession.queue.map(buildChallenge).filter((c): c is Challenge => c !== null);
   }, [fullSession.queue]);

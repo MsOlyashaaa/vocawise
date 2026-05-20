@@ -18,9 +18,15 @@ interface Slot {
   matched: boolean;
 }
 
-export function MatchPairsMode({ filter }: { filter: DeckFilter }) {
+export function MatchPairsMode({
+  filter,
+  count,
+}: {
+  filter: DeckFilter;
+  count?: number | undefined;
+}) {
   const t = useT();
-  const { queue } = useFlashcardSession(filter);
+  const { queue } = useFlashcardSession(filter, count);
   const { rateCard } = useLeitner();
   const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);

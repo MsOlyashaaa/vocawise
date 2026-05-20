@@ -3,21 +3,23 @@ import { useSettings } from '@contexts/SettingsContext';
 import { useProgress } from '@contexts/ProgressContext';
 import { useLanguagePairContext } from '@contexts/LanguagePairContext';
 import { buildSession } from '@utils/sessionPicker';
+import { pickN } from '@utils/shuffle';
 import type { VocabularyItem, VocabCategory } from '@app-types/vocabulary';
 
 export type DeckFilter =
-  | { kind: 'all' }
-  | { kind: 'category'; category: VocabCategory }
-  | { kind: 'due' }
+  | { kind: 'all'; tag?: string | undefined }
+  | { kind: 'category'; category: VocabCategory; tag?: string | undefined }
+  | { kind: 'due'; tag?: string | undefined }
   | { kind: 'favorites' }
   | { kind: 'repeat' }
   | { kind: 'single'; id: string };
 
-export function useFlashcardSession(filter: DeckFilter) {
+export function useFlashcardSession(filter: DeckFilter, sizeOverride?: number) {
   const { vocabulary } = useLanguagePairContext();
   const { cards, rateCard, toggleRepeatLater } = useProgress();
   const { perPair, global } = useSettings();
-  const size = perPair[global.activePairId]?.sessionSize ?? 10;
+  const defaultSize = perPair[global.activePairId]?.sessionSize ?? 10;
+  const size = sizeOverride ?? defaultSize;
 
   const cardsRef = useRef(cards);
   cardsRef.current = cards;
@@ -27,17 +29,23 @@ export function useFlashcardSession(filter: DeckFilter) {
       const item = vocabulary.find((v) => v.id === filter.id);
       return item ? [item] : [];
     }
+    if (filter.kind === 'all' || filter.kind === 'category') {
+      const tag = filter.tag;
+      const pool = vocabulary.filter((v) => {
+        if (filter.kind === 'category' && v.category !== filter.category) return false;
+        if (tag && !(v.tags ?? []).includes(tag)) return false;
+        return true;
+      });
+      return pickN(pool, size);
+    }
     return buildSession({
       vocabulary,
       cards: cardsRef.current,
       size,
       filter: (item, state) => {
         switch (filter.kind) {
-          case 'all':
-            return true;
-          case 'category':
-            return item.category === filter.category;
           case 'due':
+            if (filter.tag && !(item.tags ?? []).includes(filter.tag)) return false;
             return state ? state.nextDueAt <= Date.now() || state.flaggedRepeat : true;
           case 'favorites':
             return state?.isFavorite === true;

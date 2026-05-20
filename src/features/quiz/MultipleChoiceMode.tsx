@@ -10,11 +10,12 @@ import { useT } from '@hooks/useT';
 
 interface Props {
   filter: DeckFilter;
+  count?: number | undefined;
 }
 
-export function MultipleChoiceMode({ filter }: Props) {
+export function MultipleChoiceMode({ filter, count }: Props) {
   const t = useT();
-  const { queue, current, done, index, onKnow, onRepeat } = useFlashcardSession(filter);
+  const { queue, current, done, index, onKnow, onRepeat } = useFlashcardSession(filter, count);
   const { vocabulary } = useLanguagePairContext();
   const { rateCard } = useLeitner();
   const [score, setScore] = useState(0);

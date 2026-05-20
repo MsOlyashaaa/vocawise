@@ -8,9 +8,15 @@ import { useLeitner } from '@hooks/useLeitner';
 import { pickN } from '@utils/shuffle';
 import { useT } from '@hooks/useT';
 
-export function AssociationMode({ filter }: { filter: DeckFilter }) {
+export function AssociationMode({
+  filter,
+  count,
+}: {
+  filter: DeckFilter;
+  count?: number | undefined;
+}) {
   const t = useT();
-  const fullSession = useFlashcardSession(filter);
+  const fullSession = useFlashcardSession(filter, count);
   const { vocabulary } = useLanguagePairContext();
   const { rateCard } = useLeitner();
   const [score, setScore] = useState(0);
