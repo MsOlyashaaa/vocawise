@@ -1,4 +1,4 @@
-export type VocabCategory = 'nouns' | 'verbs' | 'adjectives' | 'common' | 'phrases';
+export type VocabCategory = 'nouns' | 'verbs' | 'adjectives' | 'adverbs' | 'common' | 'phrases';
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export type CaseKey = 'nom' | 'gen' | 'dat' | 'acc' | 'ins' | 'loc' | 'voc';
@@ -57,6 +57,7 @@ export const CATEGORIES: readonly VocabCategory[] = [
   'nouns',
   'verbs',
   'adjectives',
+  'adverbs',
   'common',
   'phrases',
 ] as const;
@@ -65,6 +66,7 @@ export const CATEGORY_LABELS_UK: Readonly<Record<VocabCategory, string>> = {
   nouns: 'Іменники',
   verbs: 'Дієслова',
   adjectives: 'Прикметники',
+  adverbs: 'Прислівники',
   common: 'Часті слова',
   phrases: 'Фрази',
 };
@@ -73,6 +75,7 @@ export const CATEGORY_EMOJI: Readonly<Record<VocabCategory, string>> = {
   nouns: '📦',
   verbs: '🏃',
   adjectives: '🎨',
+  adverbs: '⚡',
   common: '💬',
   phrases: '🗣️',
 };

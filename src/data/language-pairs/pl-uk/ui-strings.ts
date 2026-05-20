@@ -52,6 +52,7 @@ export const uiStrings: UiStrings = {
   'vocab.gender.neut': 'середній рід',
   'vocab.aspect.perf': 'доконаний',
   'vocab.aspect.imperf': 'недоконаний',
+  'vocab.category.adverbs': 'Прислівники',
   'vocab.plural': 'Множина',
   'vocab.conjugation': 'Дієвідміна',
   'vocab.practiceThis': 'Тренувати це слово',

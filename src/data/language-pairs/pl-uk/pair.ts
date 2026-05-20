@@ -10,14 +10,15 @@ export const plUk: LanguagePair = {
   flagBase: '🇺🇦',
   loaders: {
     vocabulary: async () => {
-      const [n, v, a, c, p] = await Promise.all([
+      const [n, v, a, av, c, p] = await Promise.all([
         import('./vocabulary/nouns'),
         import('./vocabulary/verbs'),
         import('./vocabulary/adjectives'),
+        import('./vocabulary/adverbs'),
         import('./vocabulary/common'),
         import('./vocabulary/phrases'),
       ]);
-      return [...n.default, ...v.default, ...a.default, ...c.default, ...p.default];
+      return [...n.default, ...v.default, ...a.default, ...av.default, ...c.default, ...p.default];
     },
     grammar: async () => (await import('./grammar/lessons')).default,
     uiStrings: async () => (await import('./ui-strings')).default,
