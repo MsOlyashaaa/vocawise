@@ -11,6 +11,7 @@ import { useToast } from '@components/Toast';
 import { useVocabularyById } from '@hooks/useVocabulary';
 import { useFavorites } from '@contexts/FavoritesContext';
 import { useProgress } from '@contexts/ProgressContext';
+import { transliteratePl } from '@utils/transliteratePl';
 import { CATEGORY_LABELS_UK, DIFFICULTY_LABELS_UK } from '@app-types/vocabulary';
 import { useT } from '@hooks/useT';
 
@@ -56,6 +57,7 @@ export default function WordDetailPage() {
         <Card className="flex flex-col items-center gap-3 text-center">
           <EmojiHero emoji={item.emoji} size="lg" />
           <div className="font-display text-4xl font-bold">{item.target}</div>
+          <div className="text-sm italic text-zinc-400">[{transliteratePl(item.target)}]</div>
           <div className="text-lg text-zinc-600">{item.base}</div>
           <div className="flex flex-wrap justify-center gap-2">
             <Pill tone="neutral">{DIFFICULTY_LABELS_UK[item.difficulty]}</Pill>

@@ -3,6 +3,7 @@ import { Card } from '@components/Card';
 import { Pill } from '@components/Pill';
 import { DifficultyDot } from '@components/DifficultyDot';
 import { useFavorites } from '@contexts/FavoritesContext';
+import { transliteratePl } from '@utils/transliteratePl';
 import type { VocabularyItem } from '@app-types/vocabulary';
 
 interface Props {
@@ -26,6 +27,9 @@ export function WordCard({ item, showCategory = false }: Props) {
             <span className="truncate font-display text-lg font-bold">{item.target}</span>
             <DifficultyDot value={item.difficulty} />
             {isFavorite(item.id) ? <span aria-hidden>★</span> : null}
+          </div>
+          <div className="truncate text-xs italic text-zinc-400">
+            [{transliteratePl(item.target)}]
           </div>
           <div className="truncate text-sm text-zinc-500">{item.base}</div>
         </div>
