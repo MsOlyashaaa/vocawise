@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>PL-UK Картка — варіанти структури</title>
+<style>
+  :root {
+    --ink: #1f2937;
+    --ink-soft: #4b5563;
+    --ink-faint: #9ca3af;
+    --line: #e5e7eb;
+    --line-strong: #d1d5db;
+    --card: #ffffff;
+    --cream: #fdfcf8;
+
+    --pastel-pink: #fbe7ee;
+    --pastel-blue: #e3f0fb;
+    --pastel-mint: #e3f3ec;
+    --pastel-peach: #fbeadc;
+    --pastel-lav:  #ece6f5;
+
+    --accent-pink: #c2185b;
+    --accent-blue: #1565c0;
+    --accent-mint: #2e7d32;
+    --accent-peach: #c2410c;
+    --accent-lav: #6a1b9a;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-blue) 50%, var(--pastel-mint) 100%);
+    color: var(--ink);
+    padding: 40px 24px 80px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .sub {
+    text-align: center;
+    color: var(--ink-soft);
+    margin: 0 0 48px;
+    font-size: 14px;
+  }
+  .section {
+    max-width: 1100px;
+    margin: 0 auto 56px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .section-head .tag {
+    font-size: 12px;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,0.6);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .section-head .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-left: auto;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 1fr; }
+  }
+
+  /* Generic card base */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ============ A. ГАЗЕТНИЙ ============ */
+  .a-card { text-align: center; padding: 22px 22px 18px; }
+  .a-pl {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .a-uk {
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .a-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--line-strong);
+    margin: 14px auto;
+  }
+  .a-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .a-pill {
+    background: #f3f4f6;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .a-pill .p { color: var(--ink-faint); margin-right: 5px; font-size: 10px; }
+  .a-quote {
+    font-size: 13px;
+    color: var(--ink);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .a-quote::before { content: "“"; color: var(--ink-faint); margin-right: 2px; }
+  .a-quote::after { content: "”"; color: var(--ink-faint); margin-left: 2px; }
+  .a-trans {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .a-foot {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-size: 11px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  /* ============ B. БІЧНА ВКЛАДКА ============ */
+  .b-card { padding: 0; display: flex; }
+  .b-tab {
+    width: 38px;
+    flex: 0 0 38px;
+    background: var(--pastel-blue);
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 14px;
+    color: var(--accent-blue);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  .b-body { padding: 16px 18px; flex: 1; }
+  .b-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+  .b-pl { font-size: 22px; font-weight: 700; }
+  .b-uk { font-style: italic; color: var(--ink-soft); font-size: 15px; }
+  .b-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 10px;
+    margin-bottom: 12px;
+  }
+  .b-cell .p {
+    font-size: 10px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .b-cell .f { font-size: 13px; color: var(--ink); }
+  .b-ex { font-size: 13px; color: var(--ink); }
+  .b-ex-uk { font-size: 12px; color: var(--ink-soft); font-style: italic; margin-top: 2px; }
+
+  /* ============ C. РОЗДІЛ НАВПІЛ ============ */
+  .c-card { padding: 0; display: grid; grid-template-rows: 1fr auto; }
+  .c-top { display: grid; grid-template-columns: 40% 60%; }
+  .c-left {
+    padding: 18px 16px;
+    border-right: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--cream), white);
+  }
+  .c-pl { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
+  .c-uk { font-size: 16px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
+  .c-assoc {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--ink-faint);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .c-right { padding: 14px 16px; }
+  .c-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .c-table td {
+    padding: 5px 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .c-table td:first-child {
+    color: var(--ink-faint);
+    width: 28px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .c-bottom {
+    background: #fafafa;
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .c-ex-uk { color: var(--ink-soft); font-style: italic; font-size: 12px; margin-top: 2px; }
+
+  /* ============ D. МІНІМАЛІЗМ ============ */
+  .d-card {
+    padding: 24px 26px;
+    box-shadow: none;
+    border: 1px solid var(--line-strong);
+  }
+  .d-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+  .d-pl { font-size: 22px; font-weight: 600; }
+  .d-arrow { color: var(--ink-faint); font-size: 14px; }
+  .d-uk { font-size: 16px; color: var(--ink-soft); }
+  .d-conj {
+    font-size: 12px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  .d-conj .p { color: var(--ink-faint); font-size: 10px; margin-right: 3px; }
+  .d-conj .sep { color: var(--ink-faint); margin: 0 6px; }
+  .d-conj .row-sep { display: block; height: 4px; }
+  .d-ex { font-size: 13px; color: var(--ink); }
+  .d-ex-uk { font-size: 12px; color: var(--ink-soft); font-style: italic; margin-top: 3px; }
+  .d-foot { margin-top: 14px; font-size: 10px; color: var(--ink-faint); font-style: italic; }
+
+  /* ============ E. КАРТОТЕКА ============ */
+  .e-card { padding: 18px 20px; }
+  .e-num {
+    position: absolute;
+    top: 14px; left: 14px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--pastel-peach);
+    color: var(--accent-peach);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .e-head { text-align: center; margin: 6px 0 14px; }
+  .e-pl { font-size: 22px; font-weight: 700; }
+  .e-uk { font-size: 14px; color: var(--ink-soft); font-style: italic; margin-top: 2px; }
+  .e-table {
+    width: 100%;
+    font-size: 12px;
+    font-family: "Consolas", "Menlo", monospace;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+  }
+  .e-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .e-table td:first-child, .e-table td:nth-child(3) {
+    color: var(--ink-faint);
+    width: 30px;
+  }
+  .e-quote {
+    border-left: 3px solid var(--line-strong);
+    padding-left: 10px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .e-quote-uk { color: var(--ink-soft); font-style: italic; font-size: 12px; margin-top: 2px; }
+  .e-foot { margin-top: 12px; font-size: 10px; color: var(--ink-faint); font-style: italic; text-align: center; }
+
+  .legend {
+    text-align: center;
+    margin: 60px auto 0;
+    padding: 18px;
+    max-width: 680px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .legend strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<h1>5 варіантів структури картки</h1>
+<p class="sub">Картка — нейтральна (біла/кремова). Фон сторінки — пастельний градієнт.</p>
+
+<!-- A -->
+<section class="section">
+  <div class="section-head">
+    <h2>A. Газетний</h2>
+    <span class="tag">центрований</span>
+    <span class="desc">PL по центру, кон'югація-пілюлі, цитата</span>
+  </div>
+  <div class="row">
+    <div class="card a-card">
+      <div class="a-pl">spać</div>
+      <div class="a-uk">спати</div>
+      <div class="a-divider"></div>
+      <div class="a-pills">
+        <span class="a-pill"><span class="p">ja</span>śpię</span>
+        <span class="a-pill"><span class="p">ty</span>śpisz</span>
+        <span class="a-pill"><span class="p">on</span>śpi</span>
+        <span class="a-pill"><span class="p">my</span>śpimy</span>
+        <span class="a-pill"><span class="p">wy</span>śpicie</span>
+        <span class="a-pill"><span class="p">oni</span>śpią</span>
+      </div>
+      <div class="a-quote">Dziecko śpi.</div>
+      <div class="a-trans">Дитина спить.</div>
+      <div class="a-foot">«spać» = «спати»</div>
+    </div>
+    <div class="card a-card">
+      <div class="a-pl">czytać</div>
+      <div class="a-uk">читати</div>
+      <div class="a-divider"></div>
+      <div class="a-pills">
+        <span class="a-pill"><span class="p">ja</span>czytam</span>
+        <span class="a-pill"><span class="p">ty</span>czytasz</span>
+        <span class="a-pill"><span class="p">on</span>czyta</span>
+        <span class="a-pill"><span class="p">my</span>czytamy</span>
+        <span class="a-pill"><span class="p">wy</span>czytacie</span>
+        <span class="a-pill"><span class="p">oni</span>czytają</span>
+      </div>
+      <div class="a-quote">Lubię czytać książki.</div>
+      <div class="a-trans">Я люблю читати книги.</div>
+      <div class="a-foot">cz = ч</div>
+    </div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="section">
+  <div class="section-head">
+    <h2>B. Бічна вкладка</h2>
+    <span class="tag">з номером збоку</span>
+    <span class="desc">Кольорова смужка зліва — єдиний акцент</span>
+  </div>
+  <div class="row">
+    <div class="card b-card">
+      <div class="b-tab">№ 012</div>
+      <div class="b-body">
+        <div class="b-head">
+          <div class="b-pl">spać</div>
+          <div class="b-uk">спати</div>
+        </div>
+        <div class="b-grid">
+          <div class="b-cell"><div class="p">ja</div><div class="f">śpię</div></div>
+          <div class="b-cell"><div class="p">ty</div><div class="f">śpisz</div></div>
+          <div class="b-cell"><div class="p">on</div><div class="f">śpi</div></div>
+          <div class="b-cell"><div class="p">my</div><div class="f">śpimy</div></div>
+          <div class="b-cell"><div class="p">wy</div><div class="f">śpicie</div></div>
+          <div class="b-cell"><div class="p">oni</div><div class="f">śpią</div></div>
+        </div>
+        <div class="b-ex">Dziecko śpi.</div>
+        <div class="b-ex-uk">Дитина спить.</div>
+      </div>
+    </div>
+    <div class="card b-card">
+      <div class="b-tab" style="background:var(--pastel-mint);color:var(--accent-mint)">№ 005</div>
+      <div class="b-body">
+        <div class="b-head">
+          <div class="b-pl">czytać</div>
+          <div class="b-uk">читати</div>
+        </div>
+        <div class="b-grid">
+          <div class="b-cell"><div class="p">ja</div><div class="f">czytam</div></div>
+          <div class="b-cell"><div class="p">ty</div><div class="f">czytasz</div></div>
+          <div class="b-cell"><div class="p">on</div><div class="f">czyta</div></div>
+          <div class="b-cell"><div class="p">my</div><div class="f">czytamy</div></div>
+          <div class="b-cell"><div class="p">wy</div><div class="f">czytacie</div></div>
+          <div class="b-cell"><div class="p">oni</div><div class="f">czytają</div></div>
+        </div>
+        <div class="b-ex">Lubię czytać książki.</div>
+        <div class="b-ex-uk">Я люблю читати книги.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="section">
+  <div class="section-head">
+    <h2>C. Розділ навпіл</h2>
+    <span class="tag">40 / 60</span>
+    <span class="desc">Зліва — слово, справа — таблиця кон'югації</span>
+  </div>
+  <div class="row">
+    <div class="card c-card">
+      <div class="c-top">
+        <div class="c-left">
+          <div class="c-pl">spać</div>
+          <div class="c-uk">спати</div>
+          <div class="c-assoc">«spać» = «спати»<br>imperf.</div>
+        </div>
+        <div class="c-right">
+          <table class="c-table">
+            <tr><td>ja</td><td>śpię</td><td>my</td><td>śpimy</td></tr>
+            <tr><td>ty</td><td>śpisz</td><td>wy</td><td>śpicie</td></tr>
+            <tr><td>on</td><td>śpi</td><td>oni</td><td>śpią</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="c-bottom">
+        Dziecko śpi.
+        <div class="c-ex-uk">Дитина спить.</div>
+      </div>
+    </div>
+    <div class="card c-card">
+      <div class="c-top">
+        <div class="c-left">
+          <div class="c-pl">czytać</div>
+          <div class="c-uk">читати</div>
+          <div class="c-assoc">cz = ч<br>imperf.</div>
+        </div>
+        <div class="c-right">
+          <table class="c-table">
+            <tr><td>ja</td><td>czytam</td><td>my</td><td>czytamy</td></tr>
+            <tr><td>ty</td><td>czytasz</td><td>wy</td><td>czytacie</td></tr>
+            <tr><td>on</td><td>czyta</td><td>oni</td><td>czytają</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="c-bottom">
+        Lubię czytać książki.
+        <div class="c-ex-uk">Я люблю читати книги.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D -->
+<section class="section">
+  <div class="section-head">
+    <h2>D. Мінімалізм</h2>
+    <span class="tag">тонка рамка</span>
+    <span class="desc">Все ліворуч, кон'югація в один-два рядки</span>
+  </div>
+  <div class="row">
+    <div class="card d-card">
+      <div class="d-head">
+        <span class="d-pl">spać</span>
+        <span class="d-arrow">→</span>
+        <span class="d-uk">спати</span>
+      </div>
+      <div class="d-conj">
+        <span class="p">ja</span>śpię<span class="sep">·</span>
+        <span class="p">ty</span>śpisz<span class="sep">·</span>
+        <span class="p">on</span>śpi
+        <span class="row-sep"></span>
+        <span class="p">my</span>śpimy<span class="sep">·</span>
+        <span class="p">wy</span>śpicie<span class="sep">·</span>
+        <span class="p">oni</span>śpią
+      </div>
+      <div class="d-ex">Dziecko śpi.</div>
+      <div class="d-ex-uk">Дитина спить.</div>
+      <div class="d-foot">«spać» = «спати»</div>
+    </div>
+    <div class="card d-card">
+      <div class="d-head">
+        <span class="d-pl">czytać</span>
+        <span class="d-arrow">→</span>
+        <span class="d-uk">читати</span>
+      </div>
+      <div class="d-conj">
+        <span class="p">ja</span>czytam<span class="sep">·</span>
+        <span class="p">ty</span>czytasz<span class="sep">·</span>
+        <span class="p">on</span>czyta
+        <span class="row-sep"></span>
+        <span class="p">my</span>czytamy<span class="sep">·</span>
+        <span class="p">wy</span>czytacie<span class="sep">·</span>
+        <span class="p">oni</span>czytają
+      </div>
+      <div class="d-ex">Lubię czytać książki.</div>
+      <div class="d-ex-uk">Я люблю читати книги.</div>
+      <div class="d-foot">cz = ч</div>
+    </div>
+  </div>
+</section>
+
+<!-- E -->
+<section class="section">
+  <div class="section-head">
+    <h2>E. Картотека</h2>
+    <span class="tag">кружечок-номер</span>
+    <span class="desc">Моноширинна таблиця, цитата з рискою</span>
+  </div>
+  <div class="row">
+    <div class="card e-card">
+      <div class="e-num">12</div>
+      <div class="e-head">
+        <div class="e-pl">spać</div>
+        <div class="e-uk">спати</div>
+      </div>
+      <table class="e-table">
+        <tr><td>ja</td><td>śpię</td><td>my</td><td>śpimy</td></tr>
+        <tr><td>ty</td><td>śpisz</td><td>wy</td><td>śpicie</td></tr>
+        <tr><td>on</td><td>śpi</td><td>oni</td><td>śpią</td></tr>
+      </table>
+      <div class="e-quote">
+        Dziecko śpi.
+        <div class="e-quote-uk">Дитина спить.</div>
+      </div>
+      <div class="e-foot">«spać» = «спати» · imperf.</div>
+    </div>
+    <div class="card e-card">
+      <div class="e-num">5</div>
+      <div class="e-head">
+        <div class="e-pl">czytać</div>
+        <div class="e-uk">читати</div>
+      </div>
+      <table class="e-table">
+        <tr><td>ja</td><td>czytam</td><td>my</td><td>czytamy</td></tr>
+        <tr><td>ty</td><td>czytasz</td><td>wy</td><td>czytacie</td></tr>
+        <tr><td>on</td><td>czyta</td><td>oni</td><td>czytają</td></tr>
+      </table>
+      <div class="e-quote">
+        Lubię czytać książki.
+        <div class="e-quote-uk">Я люблю читати книги.</div>
+      </div>
+      <div class="e-foot">cz = ч · imperf.</div>
+    </div>
+  </div>
+</section>
+
+<div class="legend">
+  Скажи літеру (<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong> або <strong>E</strong>) — або комбінацію (<em>напр., «B шапка + C таблиця»</em>) — і я переведу обраний варіант у PDF.
+</div>
+
+</body>
+</html>

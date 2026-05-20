@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Варіанти оформлення картки v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2937;
+    --ink-soft: #4b5563;
+    --ink-faint: #9ca3af;
+    --line: #e5e7eb;
+    --card: #ffffff;
+
+    --rose: #fbe2ec;
+    --rose-d: #c2185b;
+    --blue: #d6e8f7;
+    --blue-d: #1565c0;
+    --mint: #d8eede;
+    --mint-d: #2e7d32;
+    --peach: #fbe1cb;
+    --peach-d: #c2410c;
+    --lav:  #e8e0f3;
+    --lav-d: #6a1b9a;
+    --sand: #f3e8d0;
+    --sand-d: #8b6914;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #fce4ec 0%, #e3f2fd 50%, #e8f5e9 100%);
+    color: var(--ink);
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+  }
+  h1 { text-align: center; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .sub { text-align: center; color: var(--ink-soft); margin: 0 0 56px; font-size: 14px; }
+
+  .section {
+    max-width: 760px;
+    margin: 0 auto 64px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .section-head h2 { margin: 0; font-size: 19px; font-weight: 600; }
+  .section-head .num { font-size: 12px; color: var(--ink-faint); font-weight: 600; }
+  .section-head .desc { font-size: 13px; color: var(--ink-soft); margin-left: auto; }
+  .icon { font-style: normal; }
+
+  /* ================= 1. POLAROID ================= */
+  .polaroid {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
+    padding: 14px 14px 22px;
+    width: 320px;
+    margin: 0 auto;
+    transform: rotate(-1.2deg);
+  }
+  .polaroid-photo {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--peach) 100%);
+    height: 200px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 92px;
+    color: rgba(0,0,0,0.5);
+  }
+  .polaroid-meta {
+    margin-top: 18px;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    text-align: center;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .polaroid-uk {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 4px;
+  }
+  .polaroid-conj {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-align: center;
+    line-height: 1.7;
+  }
+  .polaroid-conj b { color: var(--ink); font-weight: 500; }
+  .polaroid-conj .lbl { color: var(--ink-faint); font-size: 9px; margin-right: 2px; }
+  .polaroid-ex {
+    margin-top: 12px;
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    text-align: center;
+    color: var(--ink);
+  }
+  .polaroid-ex em { color: var(--ink-soft); }
+
+  /* ================= 2. TICKET ================= */
+  .ticket {
+    display: flex;
+    width: 560px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    position: relative;
+  }
+  .ticket-stub {
+    background: var(--lav);
+    color: var(--lav-d);
+    width: 70px;
+    padding: 18px 10px;
+    text-align: center;
+    border-right: 2px dashed white;
+    position: relative;
+  }
+  .ticket-stub::before, .ticket-stub::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #fce4ec 0%, #e3f2fd 50%, #e8f5e9 100%);
+    border-radius: 50%;
+  }
+  .ticket-stub::before { top: -8px; }
+  .ticket-stub::after { bottom: -8px; }
+  .ticket-stub .ic { font-size: 32px; color: var(--lav-d); }
+  .ticket-stub .num {
+    margin-top: 16px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--lav-d);
+  }
+  .ticket-body { flex: 1; padding: 18px 22px; }
+  .ticket-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .ticket-pl { font-size: 26px; font-weight: 700; }
+  .ticket-arrow { color: var(--ink-faint); }
+  .ticket-uk { font-size: 18px; color: var(--ink-soft); font-style: italic; }
+  .ticket-conj {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 12px;
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  .ticket-conj .l { color: var(--ink-faint); font-size: 10px; margin-right: 4px; }
+  .ticket-ex { font-size: 13px; padding-top: 10px; border-top: 1px dotted var(--line); }
+  .ticket-ex em { display: block; color: var(--ink-soft); font-size: 12px; margin-top: 2px; }
+
+  /* ================= 3. JOURNAL COLLAGE ================= */
+  .collage {
+    width: 380px;
+    height: 280px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .collage-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, var(--mint) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, var(--rose) 0%, transparent 40%);
+    opacity: 0.6;
+  }
+  .collage-pl {
+    position: absolute;
+    top: 24px; left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 0.9;
+    transform: rotate(-3deg);
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .collage-uk {
+    position: absolute;
+    top: 90px; left: 26px;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: var(--rose-d);
+    transform: rotate(-3deg);
+  }
+  .collage-icon {
+    position: absolute;
+    top: 18px; right: 24px;
+    font-size: 56px;
+    transform: rotate(8deg);
+    color: var(--mint-d);
+    opacity: 0.85;
+  }
+  .collage-scrap {
+    position: absolute;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 8px 12px;
+    font-size: 11px;
+    color: var(--ink);
+  }
+  .collage-scrap .l { color: var(--ink-faint); font-size: 9px; }
+  .collage-scrap b { font-weight: 500; }
+  .scrap-1 { top: 130px; left: 20px; transform: rotate(-2deg); border-left: 3px solid var(--rose-d); }
+  .scrap-2 { top: 130px; right: 20px; transform: rotate(3deg); border-left: 3px solid var(--mint-d); }
+  .collage-ex {
+    position: absolute;
+    bottom: 18px; left: 20px; right: 20px;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-align: center;
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+  }
+  .collage-num {
+    position: absolute;
+    top: 8px; left: 12px;
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.2em;
+  }
+
+  /* ================= 4. CHILD BOOK ================= */
+  .child {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+    padding: 22px;
+    width: 360px;
+    margin: 0 auto;
+  }
+  .child-cloud {
+    background: var(--peach);
+    border-radius: 50% 40% 50% 45% / 45% 55% 45% 55%;
+    width: 110px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    margin: 0 auto 14px;
+    color: var(--peach-d);
+  }
+  .child-pl {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .child-uk {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: var(--peach-d);
+    margin-top: 4px;
+  }
+  .child-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .child-bubbles .b {
+    background: var(--mint);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--mint-d);
+  }
+  .child-bubbles .b .l { font-size: 9px; opacity: 0.7; margin-right: 3px; }
+  .child-ex {
+    margin-top: 16px;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .child-ex em { color: var(--ink-soft); display: block; }
+
+  /* ================= 5. DROP CAP INITIAL ================= */
+  .dropcap {
+    background: white;
+    border: 1px solid var(--line);
+    padding: 28px 30px;
+    width: 380px;
+    margin: 0 auto;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+  }
+  .dropcap-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 110px;
+    line-height: 0.85;
+    font-weight: 900;
+    color: var(--lav-d);
+    letter-spacing: -0.05em;
+  }
+  .dropcap-body { font-size: 13px; line-height: 1.6; }
+  .dropcap-pl {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .dropcap-uk { color: var(--ink-soft); font-style: italic; margin-bottom: 10px; }
+  .dropcap-conj {
+    font-size: 11px;
+    color: var(--ink);
+    line-height: 1.7;
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+    margin-top: 6px;
+  }
+  .dropcap-conj .l { color: var(--ink-faint); font-size: 9px; margin-right: 3px; }
+  .dropcap-ex {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+  }
+  .dropcap-ex b { color: var(--ink); font-style: normal; font-weight: 400; display: block; }
+  .dropcap-num { font-size: 9px; color: var(--ink-faint); letter-spacing: 0.2em; }
+
+  /* ================= 6. BANNER RIBBON ================= */
+  .banner {
+    background: white;
+    width: 380px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    padding: 26px 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner-ribbon {
+    position: absolute;
+    top: 14px; left: -38px;
+    background: var(--rose-d);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    padding: 4px 44px;
+    transform: rotate(-45deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .banner-icon {
+    position: absolute;
+    top: 18px; right: 22px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--rose-d);
+  }
+  .banner-pl {
+    margin-top: 16px;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .banner-uk { color: var(--ink-soft); font-style: italic; font-size: 16px; margin-top: 2px; }
+  .banner-conj {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 12px;
+    font-size: 12px;
+  }
+  .banner-conj .l { color: var(--ink-faint); font-size: 10px; margin-right: 4px; }
+  .banner-ex {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .banner-ex em { color: var(--ink-soft); font-size: 12px; display: block; margin-top: 2px; }
+  .banner-assoc { margin-top: 8px; font-size: 10px; color: var(--ink-faint); font-style: italic; }
+
+  /* ================= 7. STICKY NOTE ================= */
+  .sticky {
+    background: var(--sand);
+    width: 320px;
+    margin: 0 auto;
+    padding: 22px 22px 24px;
+    box-shadow: 0 8px 24px rgba(139, 105, 20, 0.18), 0 2px 4px rgba(0,0,0,0.06);
+    position: relative;
+    transform: rotate(0.8deg);
+  }
+  .sticky::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.08) 50%, var(--sand) 50.5%);
+  }
+  .sticky-icon {
+    font-size: 32px;
+    color: var(--sand-d);
+    margin-bottom: 6px;
+  }
+  .sticky-pl {
+    font-size: 24px;
+    font-weight: 700;
+    color: #5b4011;
+    letter-spacing: -0.01em;
+  }
+  .sticky-uk {
+    font-style: italic;
+    color: #7a5a26;
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  .sticky-conj {
+    font-size: 11px;
+    color: #5b4011;
+    line-height: 1.8;
+    border-top: 1px dashed rgba(139, 105, 20, 0.3);
+    border-bottom: 1px dashed rgba(139, 105, 20, 0.3);
+    padding: 8px 0;
+  }
+  .sticky-conj .l { color: rgba(139, 105, 20, 0.5); font-size: 9px; margin-right: 3px; }
+  .sticky-ex {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #5b4011;
+  }
+  .sticky-ex em { color: #7a5a26; font-size: 12px; display: block; margin-top: 2px; }
+  .sticky-num {
+    position: absolute;
+    bottom: 6px; right: 12px;
+    font-size: 9px;
+    color: rgba(139, 105, 20, 0.5);
+    font-style: italic;
+  }
+
+  /* ================= 8. TAGGED PILLS GRID ================= */
+  .pills {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    padding: 16px;
+    width: 360px;
+    margin: 0 auto;
+    display: grid;
+    gap: 8px;
+  }
+  .pill-block {
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .pill-head {
+    background: var(--blue);
+    color: var(--blue-d);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pill-head .ic { font-size: 22px; }
+  .pill-head .pl { font-size: 22px; font-weight: 700; }
+  .pill-head .uk { font-style: italic; opacity: 0.8; margin-left: auto; font-size: 14px; }
+  .pill-conj {
+    background: var(--mint);
+    color: var(--mint-d);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 12px;
+    font-size: 12px;
+  }
+  .pill-conj .l { font-size: 9px; opacity: 0.6; margin-right: 3px; }
+  .pill-ex {
+    background: var(--peach);
+    color: var(--peach-d);
+    font-size: 13px;
+  }
+  .pill-ex em { display: block; opacity: 0.75; font-size: 12px; margin-top: 2px; }
+  .pill-assoc {
+    background: var(--lav);
+    color: var(--lav-d);
+    font-size: 11px;
+    font-style: italic;
+  }
+  .pill-num {
+    text-align: right;
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.2em;
+    padding: 0 4px;
+  }
+
+  /* ================= 9. CLEAN SPLIT (з твого скріна) ================= */
+  .clean {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+    width: 720px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .clean-top {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    min-height: 200px;
+  }
+  .clean-left {
+    padding: 28px 28px 24px;
+    border-right: 1px solid var(--line);
+    background: linear-gradient(180deg, #fdfcf8 0%, #ffffff 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .clean-pl {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .clean-uk {
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .clean-meta {
+    margin-top: 22px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .clean-right {
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+  }
+  .clean-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .clean-table tr { border-bottom: 1px solid var(--line); }
+  .clean-table tr:last-child { border-bottom: 0; }
+  .clean-table td {
+    padding: 12px 8px;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .clean-table td.l {
+    color: var(--ink-faint);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 36px;
+    padding-right: 12px;
+  }
+  .clean-bottom {
+    background: #fafaf8;
+    border-top: 1px solid var(--line);
+    padding: 18px 28px;
+  }
+  .clean-ex { font-size: 16px; color: var(--ink); }
+  .clean-ex em { display: block; font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+
+  .legend {
+    text-align: center;
+    margin: 60px auto 0;
+    padding: 18px;
+    max-width: 680px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .legend strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<h1>Варіанти оформлення картки v2</h1>
+<p class="sub">8 концепцій · приклад одне дієслово · обери одну (або 2 на гібрид)</p>
+
+<!-- 1. POLAROID -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>Полароїд</h2>
+    <span class="desc">Фото-картка з рукописним підписом</span>
+  </div>
+  <div class="polaroid">
+    <div class="polaroid-photo"><i class="icon">😴</i></div>
+    <div class="polaroid-meta">spać</div>
+    <div class="polaroid-uk">спати</div>
+    <div class="polaroid-conj">
+      <span class="lbl">ja</span><b>śpię</b> · <span class="lbl">ty</span><b>śpisz</b> · <span class="lbl">on</span><b>śpi</b><br>
+      <span class="lbl">my</span><b>śpimy</b> · <span class="lbl">wy</span><b>śpicie</b> · <span class="lbl">oni</span><b>śpią</b>
+    </div>
+    <div class="polaroid-ex">Dziecko śpi.<br><em>Дитина спить.</em></div>
+  </div>
+</section>
+
+<!-- 2. TICKET -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">02</span>
+    <h2>Тікет</h2>
+    <span class="desc">Корінець з перфорацією</span>
+  </div>
+  <div class="ticket">
+    <div class="ticket-stub">
+      <div class="ic">😴</div>
+      <div class="num">№ 012 · PL-UK</div>
+    </div>
+    <div class="ticket-body">
+      <div class="ticket-head">
+        <span class="ticket-pl">spać</span>
+        <span class="ticket-arrow">→</span>
+        <span class="ticket-uk">спати</span>
+      </div>
+      <div class="ticket-conj">
+        <div><span class="l">ja</span>śpię</div>
+        <div><span class="l">ty</span>śpisz</div>
+        <div><span class="l">on</span>śpi</div>
+        <div><span class="l">my</span>śpimy</div>
+        <div><span class="l">wy</span>śpicie</div>
+        <div><span class="l">oni</span>śpią</div>
+      </div>
+      <div class="ticket-ex">
+        Dziecko śpi.
+        <em>Дитина спить.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. JOURNAL COLLAGE -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">03</span>
+    <h2>Журнальний колаж</h2>
+    <span class="desc">Асиметрія, нахили, scraps</span>
+  </div>
+  <div class="collage">
+    <div class="collage-bg"></div>
+    <div class="collage-num">№ 012</div>
+    <div class="collage-pl">spać</div>
+    <div class="collage-uk">спати</div>
+    <div class="collage-icon">😴</div>
+    <div class="collage-scrap scrap-1">
+      <div><span class="l">ja</span> <b>śpię</b></div>
+      <div><span class="l">ty</span> <b>śpisz</b></div>
+      <div><span class="l">on</span> <b>śpi</b></div>
+    </div>
+    <div class="collage-scrap scrap-2">
+      <div><span class="l">my</span> <b>śpimy</b></div>
+      <div><span class="l">wy</span> <b>śpicie</b></div>
+      <div><span class="l">oni</span> <b>śpią</b></div>
+    </div>
+    <div class="collage-ex">Dziecko śpi. — Дитина спить.</div>
+  </div>
+</section>
+
+<!-- 4. CHILD BOOK -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2>Дитяча книжка</h2>
+    <span class="desc">Облачко, рукописний шрифт, bubbles</span>
+  </div>
+  <div class="child">
+    <div class="child-cloud">😴</div>
+    <div class="child-pl">spać</div>
+    <div class="child-uk">спати</div>
+    <div class="child-bubbles">
+      <span class="b"><span class="l">ja</span>śpię</span>
+      <span class="b"><span class="l">ty</span>śpisz</span>
+      <span class="b"><span class="l">on</span>śpi</span>
+      <span class="b"><span class="l">my</span>śpimy</span>
+      <span class="b"><span class="l">wy</span>śpicie</span>
+      <span class="b"><span class="l">oni</span>śpią</span>
+    </div>
+    <div class="child-ex">Dziecko śpi.<em>Дитина спить.</em></div>
+  </div>
+</section>
+
+<!-- 5. DROP CAP -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Друкарський ініціал</h2>
+    <span class="desc">Drop-cap, як в книзі</span>
+  </div>
+  <div class="dropcap">
+    <div class="dropcap-letter">S</div>
+    <div class="dropcap-body">
+      <div class="dropcap-num">№ 012</div>
+      <div class="dropcap-pl">spać</div>
+      <div class="dropcap-uk">спати</div>
+      <div class="dropcap-conj">
+        <span class="l">ja</span>śpię ·
+        <span class="l">ty</span>śpisz ·
+        <span class="l">on</span>śpi ·
+        <span class="l">my</span>śpimy ·
+        <span class="l">wy</span>śpicie ·
+        <span class="l">oni</span>śpią
+      </div>
+      <div class="dropcap-ex">
+        <b>Dziecko śpi.</b>
+        Дитина спить.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. BANNER RIBBON -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">06</span>
+    <h2>Стрічка в кутку</h2>
+    <span class="desc">Діагональний banner + кругла іконка</span>
+  </div>
+  <div class="banner">
+    <div class="banner-ribbon">№ 012</div>
+    <div class="banner-icon">😴</div>
+    <div class="banner-pl">spać</div>
+    <div class="banner-uk">спати</div>
+    <div class="banner-conj">
+      <div><span class="l">ja</span>śpię</div>
+      <div><span class="l">ty</span>śpisz</div>
+      <div><span class="l">on</span>śpi</div>
+      <div><span class="l">my</span>śpimy</div>
+      <div><span class="l">wy</span>śpicie</div>
+      <div><span class="l">oni</span>śpią</div>
+    </div>
+    <div class="banner-ex">
+      Dziecko śpi.
+      <em>Дитина спить.</em>
+    </div>
+    <div class="banner-assoc">«spać» = «спати»</div>
+  </div>
+</section>
+
+<!-- 7. STICKY NOTE -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">07</span>
+    <h2>Стікі-нот</h2>
+    <span class="desc">Загнутий куточок, пастельний фон, рукописна нотатка</span>
+  </div>
+  <div class="sticky">
+    <div class="sticky-icon">😴</div>
+    <div class="sticky-pl">spać</div>
+    <div class="sticky-uk">спати</div>
+    <div class="sticky-conj">
+      <span class="l">ja</span>śpię ·
+      <span class="l">ty</span>śpisz ·
+      <span class="l">on</span>śpi<br>
+      <span class="l">my</span>śpimy ·
+      <span class="l">wy</span>śpicie ·
+      <span class="l">oni</span>śpią
+    </div>
+    <div class="sticky-ex">
+      Dziecko śpi.
+      <em>Дитина спить.</em>
+    </div>
+    <div class="sticky-num">№ 012</div>
+  </div>
+</section>
+
+<!-- 8. TAGGED PILLS -->
+<section class="section">
+  <div class="section-head">
+    <span class="num">08</span>
+    <h2>Кольорові таблетки</h2>
+    <span class="desc">Кожен блок — окрема пастельна капсула</span>
+  </div>
+  <div class="pills">
+    <div class="pill-num">№ 012</div>
+    <div class="pill-block pill-head">
+      <span class="ic">😴</span>
+      <span class="pl">spać</span>
+      <span class="uk">спати</span>
+    </div>
+    <div class="pill-block pill-conj">
+      <div><span class="l">ja</span>śpię</div>
+      <div><span class="l">ty</span>śpisz</div>
+      <div><span class="l">on</span>śpi</div>
+      <div><span class="l">my</span>śpimy</div>
+      <div><span class="l">wy</span>śpicie</div>
+      <div><span class="l">oni</span>śpią</div>
+    </div>
+    <div class="pill-block pill-ex">
+      Dziecko śpi.
+      <em>Дитина спить.</em>
+    </div>
+    <div class="pill-block pill-assoc">«spać» = «спати»</div>
+  </div>
+</section>
+
+<!-- 9. CLEAN SPLIT -->
+<section class="section" style="max-width: 760px;">
+  <div class="section-head">
+    <span class="num">09</span>
+    <h2>Чистий розділ 40/60</h2>
+    <span class="desc">Прозоро, академічно, типографічно</span>
+  </div>
+  <div class="clean">
+    <div class="clean-top">
+      <div class="clean-left">
+        <div class="clean-pl">spać</div>
+        <div class="clean-uk">спати</div>
+        <div class="clean-meta">«spać» = «спати»<br>imperf.</div>
+      </div>
+      <div class="clean-right">
+        <table class="clean-table">
+          <tr><td class="l">JA</td><td>śpię</td><td class="l">MY</td><td>śpimy</td></tr>
+          <tr><td class="l">TY</td><td>śpisz</td><td class="l">WY</td><td>śpicie</td></tr>
+          <tr><td class="l">ON</td><td>śpi</td><td class="l">ONI</td><td>śpią</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="clean-bottom">
+      <div class="clean-ex">
+        Dziecko śpi.
+        <em>Дитина спить.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="legend">
+  Скажи номер (<strong>01–09</strong>) або комбінацію (<em>напр., «04 шапка + 02 кон'югація»</em>) — переведу обраний варіант у PDF.<br>
+  💡 У PDF деякі ефекти (тіні, нахили, рукописний шрифт) обмежені — підбиратиму найближчий аналог.
+</div>
+
+</body>
+</html>

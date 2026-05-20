@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocawise</title>
+    <script>
+      (function () {
+        var path = window.location.pathname.replace(/^\/vocawise/, '');
+        if (path && path !== '/') {
+          window.location.replace('/vocawise/#' + path);
+        } else {
+          window.location.replace('/vocawise/');
+        }
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
