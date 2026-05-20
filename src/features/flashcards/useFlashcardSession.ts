@@ -10,7 +10,8 @@ export type DeckFilter =
   | { kind: 'category'; category: VocabCategory }
   | { kind: 'due' }
   | { kind: 'favorites' }
-  | { kind: 'repeat' };
+  | { kind: 'repeat' }
+  | { kind: 'single'; id: string };
 
 export function useFlashcardSession(filter: DeckFilter) {
   const { vocabulary } = useLanguagePairContext();
@@ -22,6 +23,10 @@ export function useFlashcardSession(filter: DeckFilter) {
   cardsRef.current = cards;
 
   const queue = useMemo<VocabularyItem[]>(() => {
+    if (filter.kind === 'single') {
+      const item = vocabulary.find((v) => v.id === filter.id);
+      return item ? [item] : [];
+    }
     return buildSession({
       vocabulary,
       cards: cardsRef.current,
@@ -43,7 +48,6 @@ export function useFlashcardSession(filter: DeckFilter) {
     });
     // Intentionally exclude `cards` from deps: queue must stay frozen during
     // a session, otherwise rateCard mutations re-shuffle the deck mid-click.
-     
   }, [vocabulary, size, filter]);
 
   const [index, setIndex] = useState(0);

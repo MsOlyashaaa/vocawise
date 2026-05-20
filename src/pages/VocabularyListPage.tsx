@@ -29,11 +29,21 @@ export default function VocabularyListPage() {
   const [query, setQuery] = useState('');
   const [diff, setDiff] = useState<Difficulty | 'all'>('all');
   const [status, setStatus] = useState<Status>('all');
+  const [tag, setTag] = useState<string>('all');
+
+  const tags = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const i of items) {
+      for (const t of i.tags ?? []) counts.set(t, (counts.get(t) ?? 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  }, [items]);
 
   const filtered = useMemo(() => {
     const q = query.toLocaleLowerCase().trim();
     return items.filter((i) => {
       if (diff !== 'all' && i.difficulty !== diff) return false;
+      if (tag !== 'all' && !(i.tags ?? []).includes(tag)) return false;
       if (status !== 'all') {
         const learned = cards[i.id]?.isLearned === true;
         if (status === 'learned' && !learned) return false;
@@ -43,7 +53,7 @@ export default function VocabularyListPage() {
         return false;
       return true;
     });
-  }, [items, cards, query, diff, status]);
+  }, [items, cards, query, diff, status, tag]);
 
   if (!category || !CATEGORIES.includes(category as VocabCategory)) {
     return <Navigate to="/vocabulary" replace />;
@@ -82,6 +92,20 @@ export default function VocabularyListPage() {
             </button>
           ))}
         </div>
+        {tags.length > 0 ? (
+          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+            <button onClick={() => setTag('all')} className="shrink-0">
+              <Pill tone={tag === 'all' ? 'brand' : 'neutral'}>усі групи</Pill>
+            </button>
+            {tags.map(([tg, n]) => (
+              <button key={tg} onClick={() => setTag(tg)} className="shrink-0">
+                <Pill tone={tag === tg ? 'brand' : 'neutral'}>
+                  {tg} · {n}
+                </Pill>
+              </button>
+            ))}
+          </div>
+        ) : null}
         {filtered.length === 0 ? (
           <EmptyState title={t('common.empty')} />
         ) : (

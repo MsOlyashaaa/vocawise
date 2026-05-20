@@ -5,6 +5,10 @@ import { CATEGORIES, type VocabCategory } from '@app-types/vocabulary';
 
 function parseFilter(params: URLSearchParams): DeckFilter {
   const deck = params.get('deck') ?? 'due';
+  if (deck === 'single') {
+    const id = params.get('id');
+    if (id) return { kind: 'single', id };
+  }
   if (deck === 'all') return { kind: 'all' };
   if (deck === 'favorites') return { kind: 'favorites' };
   if (deck === 'repeat') return { kind: 'repeat' };

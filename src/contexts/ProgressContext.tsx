@@ -15,6 +15,7 @@ interface ProgressContextValue {
   lessonsRead: readonly string[];
   aggregate: ProgressAggregate;
   rateCard: (itemId: string, correct: boolean) => string[];
+  markLearned: (itemId: string) => void;
   toggleRepeatLater: (itemId: string) => void;
   markLessonRead: (lessonId: string) => void;
   resetProgress: () => void;
@@ -145,6 +146,29 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     [pairId, persist, vocabulary],
   );
 
+  const markLearned = useCallback<ProgressContextValue['markLearned']>(
+    (itemId) => {
+      persist((draft) => {
+        const pair = draft.pairs[pairId];
+        if (!pair) return;
+        const prev = pair.cards[itemId] ?? newCardState(itemId);
+        const now = Date.now();
+        pair.cards[itemId] = {
+          ...prev,
+          box: 5,
+          correctStreak: Math.max(2, prev.correctStreak),
+          lastReviewedAt: now,
+          nextDueAt: now + 14 * 24 * 60 * 60 * 1000,
+          totalSeen: prev.totalSeen + 1,
+          totalCorrect: prev.totalCorrect + 1,
+          flaggedRepeat: false,
+          isLearned: true,
+        };
+      });
+    },
+    [pairId, persist],
+  );
+
   const toggleRepeatLater = useCallback<ProgressContextValue['toggleRepeatLater']>(
     (itemId) => {
       persist((draft) => {
@@ -204,6 +228,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       lessonsRead,
       aggregate,
       rateCard,
+      markLearned,
       toggleRepeatLater,
       markLessonRead,
       resetProgress,
@@ -217,6 +242,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       lessonsRead,
       aggregate,
       rateCard,
+      markLearned,
       toggleRepeatLater,
       markLessonRead,
       resetProgress,

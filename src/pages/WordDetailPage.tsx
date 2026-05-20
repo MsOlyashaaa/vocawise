@@ -7,8 +7,10 @@ import { EmojiHero } from '@features/vocabulary/EmojiHero';
 import { AssociationCallout } from '@features/vocabulary/AssociationCallout';
 import { GrammarTable } from '@features/grammar/GrammarTable';
 import { EmptyState } from '@components/EmptyState';
+import { useToast } from '@components/Toast';
 import { useVocabularyById } from '@hooks/useVocabulary';
 import { useFavorites } from '@contexts/FavoritesContext';
+import { useProgress } from '@contexts/ProgressContext';
 import { CATEGORY_LABELS_UK, DIFFICULTY_LABELS_UK } from '@app-types/vocabulary';
 import { useT } from '@hooks/useT';
 
@@ -19,6 +21,8 @@ export default function WordDetailPage() {
   const decoded = id ? decodeURIComponent(id) : '';
   const item = useVocabularyById(decoded);
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { cards, markLearned } = useProgress();
+  const { push } = useToast();
 
   if (!item) {
     return (
@@ -30,6 +34,7 @@ export default function WordDetailPage() {
   }
 
   const fav = isFavorite(item.id);
+  const learned = cards[item.id]?.isLearned === true;
 
   return (
     <>
@@ -104,13 +109,26 @@ export default function WordDetailPage() {
           </Card>
         ) : null}
 
-        <Button
-          variant="primary"
-          fullWidth
-          onClick={() => nav('/practice/multipleChoice', { state: { focusId: item.id } })}
-        >
-          {t('vocab.practiceThis')}
-        </Button>
+        <div className="flex flex-col gap-2">
+          <Button
+            variant={learned ? 'secondary' : 'primary'}
+            fullWidth
+            disabled={learned}
+            onClick={() => {
+              markLearned(item.id);
+              push(`«${item.target}» позначено як вивчене.`, 'success');
+            }}
+          >
+            {learned ? '✓ Вивчено' : 'Я знаю це слово'}
+          </Button>
+          <Button
+            variant="secondary"
+            fullWidth
+            onClick={() => nav(`/flashcards/session?deck=single&id=${encodeURIComponent(item.id)}`)}
+          >
+            {t('vocab.practiceThis')}
+          </Button>
+        </div>
       </div>
     </>
   );
