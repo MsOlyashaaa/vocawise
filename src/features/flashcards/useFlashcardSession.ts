@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useSettings } from '@contexts/SettingsContext';
 import { useProgress } from '@contexts/ProgressContext';
 import { useLanguagePairContext } from '@contexts/LanguagePairContext';
@@ -18,10 +18,13 @@ export function useFlashcardSession(filter: DeckFilter) {
   const { perPair, global } = useSettings();
   const size = perPair[global.activePairId]?.sessionSize ?? 10;
 
+  const cardsRef = useRef(cards);
+  cardsRef.current = cards;
+
   const queue = useMemo<VocabularyItem[]>(() => {
     return buildSession({
       vocabulary,
-      cards,
+      cards: cardsRef.current,
       size,
       filter: (item, state) => {
         switch (filter.kind) {
@@ -38,7 +41,10 @@ export function useFlashcardSession(filter: DeckFilter) {
         }
       },
     });
-  }, [vocabulary, cards, size, filter]);
+    // Intentionally exclude `cards` from deps: queue must stay frozen during
+    // a session, otherwise rateCard mutations re-shuffle the deck mid-click.
+     
+  }, [vocabulary, size, filter]);
 
   const [index, setIndex] = useState(0);
   const current = queue[index];
